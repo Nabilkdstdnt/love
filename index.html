@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('desktop-wallpaper-cool-of-love-group-love-theme.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: right;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-container button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease; /* Added transition */
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 400px) {
+            .login-container {
+                width: 90%;
+                padding: 15px;
+            }
+            .login-container input {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required aria-label="Username">
+            <input type="password" id="password" placeholder="Password" required aria-label="Password">
+            <button type="submit">Login</button>
+        </form>
+        <button id="playAudioButton" style="margin-top: 20px;" tabindex="0">Play Background Music</button>
+    </div>
+
+    <audio id="background-audio" src="dhadkan.mp3" loop preload="auto"></audio> <!-- Added preload attribute -->
+
+    <script>
+        document.getElementById('playAudioButton').addEventListener('click', function() {
+            var audio = document.getElementById('background-audio');
+            audio.muted = false;
+            audio.play();
+            this.style.display = 'none'; // Hide the button after playing the audio
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const correctUsername = 'admin';
+            const correctPassword = 'password123';
+
+            if (username === correctUsername && password === correctPassword) {
+                console.log('Redirecting to the desired URL...');
+                window.location.href = 'https://nabil69bd.github.io/wifi/';
+            } else {
+                console.log('Invalid username or password.');
+                alert('Invalid username or password.');
+            }
+        });
+
+        window.addEventListener('load', function() {
+            var audio = document.getElementById('background-audio');
+            audio.play().catch(error => {
+                console.log('Audio playback prevented: ', error);
+            });
+            document.body.addEventListener('click', function() {
+                audio.muted = false;
+            }, { once: true });
+        });
+    </script>
+
+</body>
+</html>
